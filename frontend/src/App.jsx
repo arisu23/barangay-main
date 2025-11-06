@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { AppBar, Toolbar, Typography, Button, Container } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 // ✅ Import Pages
 import ResidentsPage from "./pages/ResidentsPage";
@@ -8,12 +9,16 @@ import HouseholdsPage from "./pages/HouseholdsPage";
 import IncidentsPage from "./pages/IncidentsPage";
 import DocumentsPage from "./pages/DocumentsPage";
 import CertificatePage from "./pages/CertificatePage";
+import LoginPage from "./pages/LoginPage";
 // import { useReactToPrint } from "react-to-print";
 
 export default function App() {
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/";
+  
   return (
     <>
-      {/* Navbar */}
+      {isLoginPage ? null : (
       <AppBar position="static" color="primary">
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="h6">Barangay Information System</Typography>
@@ -37,11 +42,12 @@ export default function App() {
           </div>
         </Toolbar>
       </AppBar>
+      )}
 
       {/* Main Content */}
       <Container sx={{ marginTop: 4 }}>
         <Routes>
-          <Route path="/" element={<ResidentsPage />} />
+          <Route path="/" element={<LoginPage />} />
           <Route path="/residents" element={<ResidentsPage />} />
           <Route path="/households" element={<HouseholdsPage />} />
           <Route path="/incidents" element={<IncidentsPage />} />
