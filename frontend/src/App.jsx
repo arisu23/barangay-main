@@ -8,6 +8,7 @@ import HouseholdsPage from "./pages/HouseholdsPage";
 import IncidentsPage from "./pages/IncidentsPage";
 import DocumentsPage from "./pages/DocumentsPage";
 import CertificatePage from "./pages/CertificatePage";
+import ManageUser from "./pages/Manageuser";
 // import { useReactToPrint } from "react-to-print";
 
 export default function App() {
@@ -19,6 +20,9 @@ export default function App() {
           <Typography variant="h6">Barangay Information System</Typography>
 
           <div>
+            <Button color="inherit" component={Link} to="/manage-users">
+              Manage Account
+            </Button>
             <Button color="inherit" component={Link} to="/residents">
               Residents
             </Button>
@@ -42,11 +46,12 @@ export default function App() {
       <Container sx={{ marginTop: 4 }}>
         <Routes>
           <Route path="/" element={<ResidentsPage />} />
+          <Route path="/manage-users" element={<ManageUser />} />
           <Route path="/residents" element={<ResidentsPage />} />
           <Route path="/households" element={<HouseholdsPage />} />
           <Route path="/incidents" element={<IncidentsPage />} />
           <Route path="/documents" element={<DocumentsPage />} />
-                 <Route path="/certificate" element={<CertificatePage />} />
+          <Route path="/certificate" element={<CertificatePage />} />
         </Routes>
       </Container>
     </>
