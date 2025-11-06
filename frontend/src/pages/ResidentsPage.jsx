@@ -71,8 +71,11 @@ import {
   TableCell,
   TableBody,
   Avatar,
-  Box
+  Box,
+  TextField,
+  InputAdornment
 } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
 import { getResidents, deleteResident } from '../api/residentsApi'
 import ResidentForm from '../components/ResidentForm'
 
@@ -80,6 +83,7 @@ export default function ResidentsPage() {
   const [residents, setResidents] = useState([])
   const [editing, setEditing] = useState(null)
   const [openForm, setOpenForm] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
 
   const load = async () => {
     try {
@@ -103,21 +107,44 @@ export default function ResidentsPage() {
   // Base URL for photo
   const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api'
 
+  // Filter residents based on search query
+  const filteredResidents = residents.filter((r) => {
+    const fullName = `${r.first_name} ${r.middle_name || ''} ${r.last_name}`.toLowerCase()
+    return fullName.includes(searchQuery.toLowerCase())
+  })
+
   return (
     <Container>
       <Typography variant="h4" my={2}>
         Residents
       </Typography>
 
-      <Button
-        variant="contained"
-        onClick={() => {
-          setEditing(null)
-          setOpenForm(true)
-        }}
-      >
-        Add Resident
-      </Button>
+      <Box sx={{ display: 'flex', gap: 2, mb: 2, alignItems: 'center' }}>
+        <TextField
+          placeholder="Search by name..."
+          variant="outlined"
+          size="small"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          sx={{ flexGrow: 1 }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
+        <Button
+          variant="contained"
+          onClick={() => {
+            setEditing(null)
+            setOpenForm(true)
+          }}
+        >
+          Add Resident
+        </Button>
+      </Box>
 
       <Table sx={{ mt: 2 }}>
         <TableHead>
@@ -130,7 +157,7 @@ export default function ResidentsPage() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {residents.map((r) => (
+          {filteredResidents.map((r) => (
             <TableRow key={r.id}>
               <TableCell>{r.id}</TableCell>
               
