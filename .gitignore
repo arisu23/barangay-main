@@ -3,6 +3,8 @@ node_modules/
 
 # Environment files
 .env
+.env.local
+.env.*.local
 
 # Logs
 npm-debug.log*
@@ -16,4 +18,17 @@ build/
 
 # IDE / Editor files
 .vscode/
-.DS_Store
+.idea/
+*.swp
+*.swo
+*~
+
+
+
+
+
+# Misc
+.cache/
+temp/
+tmp/
+yarn.lock

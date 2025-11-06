@@ -68,12 +68,10 @@ CREATE TABLE households (
 );
  
  CREATE TABLE IF NOT EXISTS accounts (
-  user_id INT PRIMARY KEY,
+  user_id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(50) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
-  role ENUM('Admin', 'Staff', 'Captain') NOT NULL DEFAULT 'Staff',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES residents(id) ON DELETE CASCADE
+  role ENUM('Admin', 'Staff') NOT NULL DEFAULT 'Staff'
 );
 
  

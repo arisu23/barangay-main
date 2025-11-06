@@ -6,6 +6,7 @@ import residentsRoutes from './routes/residents.js'
 import incidentsRoutes from "./routes/incidents.js";
 import householdsRoutes from "./routes/households.js";
 import documentsRoutes from "./routes/documents.js";
+import accountsRoutes from "./routes/accounts.js";
 
 dotenv.config()
 
@@ -19,6 +20,7 @@ app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')))
 app.use("/api/incidents", incidentsRoutes);
 app.use("/api/households", householdsRoutes);
 app.use("/api/documents", documentsRoutes);
+app.use("/api/accounts", accountsRoutes);
 
 // Root test
 app.get('/', (req, res) => {
